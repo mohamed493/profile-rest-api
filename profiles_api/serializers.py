@@ -10,7 +10,6 @@ class UserProfileSerializers(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-
         user=models.UserProfile.objects.create_user(
             name=validated_data["name"] ,
             email=validated_data["email"] ,
@@ -18,3 +17,12 @@ class UserProfileSerializers(serializers.ModelSerializer):
 
         )
         return user 
+
+
+class ProfileFeedItemSerializers(serializers.ModelSerializer):
+
+        class Meta:
+            model=models.ProfileFeedItem
+            fields = '__all__'
+            extra_kwargs = {'user_profile': {'read_only': True}}
+
